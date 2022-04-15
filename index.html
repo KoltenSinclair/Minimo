@@ -7,11 +7,56 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="scripts/search.js"></script>
     <script src="scripts/load.js"></script>
+    
+    <script>
+
+      function currentTime()
+      {
+        let date = new Date(); 
+        let hh = date.getHours();
+        let mm = date.getMinutes();
+        let ss = date.getSeconds();
+
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        let weekday = days[date.getDay()];
+        
+        let dateNum = date.getDate();
+
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let month = months[date.getMonth()];
+
+        let session = "AM";
+
+        if(hh === 0){
+          hh = 12;
+        }
+        if(hh > 12){
+          hh = hh - 12;
+          session = "PM";
+        }
+
+        //hh = (hh < 10) ? "0" + hh : hh;
+        mm = (mm < 10) ? "0" + mm : mm;
+        ss = (ss < 10) ? "0" + ss : ss;
+    
+        let time = hh + ":" + mm + " " + session;
+        let fulldate = weekday + ", " + month + " " + dateNum;
+
+        document.getElementById("clock-1").innerText = time;
+        document.getElementById("clock-2").innerText = fulldate;
+      }
+      const myTimeout = setInterval(currentTime, 1000);
+
+    </script>
   </head>
 
   <body>
     <div class="container">
       <div class="head">
+
+        <div id="clock-1" onload="currentTime()"></div>
+        <div id="clock-2" onload="currentTime()"></div>
+
         <div class="search_box">
 
           <img class="engine" id="engineLogo" src="icons/google.svg" onclick="toggleEngine()" style="cursor:pointer" />
